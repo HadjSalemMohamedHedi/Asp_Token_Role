@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\IIS Publish\CustomerApi</_PublishTargetUrl>
+    <History>True|2022-05-12T13:56:45.7604503Z;True|2022-05-12T14:54:45.3176413+01:00;</History>
+  </PropertyGroup>
+</Project>

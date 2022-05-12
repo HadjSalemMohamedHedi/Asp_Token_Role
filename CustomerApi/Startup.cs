@@ -36,7 +36,12 @@ namespace CustomerApi
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddControllers();
+
             services.AddDbContext<Learn_DBContext>(options => options.UseSqlServer(ConnectionString));
+
+            var _dbcontext = services.BuildServiceProvider().GetService<Learn_DBContext>();
+
             
             
             var _jwtsetting = Configuration.GetSection("securityKey");
@@ -61,11 +66,21 @@ namespace CustomerApi
                 };
             });
 
+            services.AddSingleton<IRefreshTokenGenerator>(provider => new RefreshTokenGenerator(_dbcontext));
+
+            //Cors
+            services.AddCors(option =>
+            {
+                option.AddDefaultPolicy(builder =>
+                {
+                    builder
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
 
 
-
-
-            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CustomerApi", Version = "v1" });
@@ -88,6 +103,14 @@ namespace CustomerApi
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseCors();
+
+
+
+
+
+
 
             app.UseEndpoints(endpoints =>
             {

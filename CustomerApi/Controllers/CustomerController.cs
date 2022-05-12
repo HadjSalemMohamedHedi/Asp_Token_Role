@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace CustomerApi.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
